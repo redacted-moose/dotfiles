@@ -1,0 +1,7 @@
+#!/bin/sh
+
+if [ -f /tmp/nvidia ]; then
+  rm /tmp/nvidia
+else
+  touch /tmp/nvidia
+fi

@@ -1,0 +1,56 @@
+#!/bin/sh
+#
+# ~/.xprofile
+#
+
+# Make CapsLock a Control key
+setxkbmap -option compose:ralt,ctrl:nocaps
+
+# xrandr --setprovideroutputsource modesetting NVIDIA-0
+# xrandr --auto
+
+# Connect to virtual displays
+# intel-virtual-output
+
+# Enable vertical scrolling
+xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation" 1
+xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Button" 2
+xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Timeout" 200
+
+# Enable horizontal scrolling
+xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Axes" 6 7 4 5
+
+# Enable middle button emulation
+xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Middle Button Emulation" 1
+xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Middle Button Timeout" 50
+
+# Enable horizontal scrolling for touchpad
+# xinput set-prop "SynPS/2 Synaptics TouchPad" "Synaptics Two-Finger Scrolling" 1 1
+synclient VertTwoFingerScroll=1
+synclient HorizTwoFingerScroll=1
+
+# Enable palm detection
+# xinput set-prop "SynPS/2 Synaptics TouchPad" "Synaptics Palm Detection" 1
+synclient PalmDetect=1
+
+# Set Touchpad mouse click event buttons
+synclient TapButton1=1
+synclient TapButton2=2
+synclient TapButton3=3
+
+## Load .Xresources if they exist
+[ -f "$HOME/.Xresources" ] && xrdb -merge -I"$HOME" "$HOME/.Xresources"
+
+## Ensure that GTK themes are applied uniformly in the Desktop Environment
+
+export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
+
+
+## Where the default Home folders have not already been created, generate them
+
+if [ -x /usr/bin/xdg-user-dirs-update ]; then
+   /usr/bin/xdg-user-dirs-update
+fi
+
+# xrandr --output LVDS-1-1 --set "PRIME Synchronization" 0
+autorandr -c --skip-options panning

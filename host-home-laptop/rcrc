@@ -1,0 +1,6 @@
+DOTFILES_DIRS="$HOME/etc"
+SYMLINK_DIRS=""
+UNDOTTED="bin"
+TAGS="i3 nvim xresources"
+HOSTNAME="home-laptop"
+EXCLUDES="README.md"

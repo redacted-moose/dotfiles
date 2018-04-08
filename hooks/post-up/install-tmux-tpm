@@ -1,0 +1,8 @@
+#!/bin/bash
+
+TPM_GIT_REMOTE="https://github.com/tmux-plugins/tpm"
+
+if [[ -f ~/.tmux.conf ]]; then
+    mkdir -p ~/.tmux/plugins
+    [[ -d ~/.tmux/plugins/tpm ]] || git clone $TPM_GIT_REMOTE ~/.tmux/plugins/tpm
+fi

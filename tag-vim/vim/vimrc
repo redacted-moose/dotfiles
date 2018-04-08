@@ -1,0 +1,128 @@
+" Note: Skip initialization for vim-tiny or vim-small.
+if 0 | endif
+
+" Plugins
+call plug#begin('~/.vim/bundle')
+
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-vinegar'
+
+Plug 'airblade/vim-gitgutter'
+
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+Plug 'terryma/vim-multiple-cursors'
+
+Plug 'editorconfig/editorconfig-vim'
+
+" Plug 'scrooloose/syntastic'
+" Plug 'scrooloose/nerdtree'
+
+Plug 'w0rp/ale'
+Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
+Plug 'baabelfish/nvim-nim', { 'for': 'nim' }
+
+Plug 'sheerun/vim-polyglot'
+
+Plug 'zchee/deoplete-jedi', { 'for': 'python' }
+
+Plug 'lervag/vimtex', { 'for': 'tex' }
+
+Plug 'cjrh/vim-conda', { 'for': 'python' }
+
+Plug 'rust-lang/rust.vim'
+
+Plug 'edkolev/promptline.vim'
+" Plug 'edkolev/tmuxline.vim'
+
+Plug 'Yggdroot/indentLine'
+Plug 'Raimondi/delimitMate'
+
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'xolox/vim-easytags' | Plug 'xolox/vim-misc'
+
+" vim-snippets depends on ultisnips
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+
+Plug 'junegunn/fzf', { 'frozen': 1, 'dir': '~/.fzf' }
+Plug 'junegunn/fzf.vim'
+
+Plug 'chriskempson/base16-vim'
+
+call plug#end()
+
+set number " Turn on line numbers
+set relativenumber " Turn on relative line numbers
+set tabstop=4 " number of visual spaces per tab
+set softtabstop=4 " number of spaces in tab when editing
+set shiftwidth=4
+set expandtab " tabs are spaces
+set showcmd " shows last command at the bottom
+set cursorline " highlights current line
+set showmatch " highlight matching [{()}]
+set hlsearch " highlight matches
+set ttyfast " Optimize for fast terminal connections
+set clipboard=unnamed " Use the OS clipboard by default (on versions compiled with `+clipboard`)
+set foldmethod=syntax " Turn on folds using syntax-defined folding
+set splitbelow " Splits open below instead of above
+set splitright " Vsplits open on the right instead of the left
+set mouse=a " Enable mouse scrolling and movement in all modes
+set termguicolors " True color mode
+set hidden
+
+let mapleader = "\<SPACE>"
+nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>bn :bn<CR>
+nnoremap <leader>bp :bp<CR>
+nnoremap <leader>f :Files<CR>
+nnoremap <leader>t :Tags<CR>
+
+inoremap <c-j> <c-n>
+inoremap <c-k> <c-p>
+
+nnoremap <m-h> <c-w>h
+nnoremap <m-j> <c-w>j
+nnoremap <m-k> <c-w>k
+nnoremap <m-l> <c-w>l
+
+" <Ctrl-l> redraws the screen and removes any search highlighting.
+nnoremap <silent> <C-l> :nohl<CR><C-l>
+
+" Allow saving of files as sudo when I forgot to start vim using sudo.
+cmap w!! w !sudo tee > /dev/null %
+
+" Set the color scheme
+colorscheme base16-tomorrow-night
+" colorscheme Tomorrow-Night
+
+" Change cursor style for different modes
+" 1 or 0 -> blinking block
+" 2 -> solid block
+" 3 -> blinking underscore
+" 4 -> solid underscore
+" 5 -> blinking pipe
+" 6 -> solid pipe
+if exists("$TMUX")
+	" tmux will only forward escape sequences to the terminal if surrounded by
+	" a DCS sequence
+	let &t_SI .= "\<Esc>Ptmux;\<Esc>\<Esc>[6 q\<Esc>\\"
+	let &t_SR .= "\<Esc>Ptmux;\<Esc>\<Esc>[4 q\<Esc>\\"
+	let &t_EI .= "\<Esc>Ptmux;\<Esc>\<Esc>[2 q\<Esc>\\"
+	autocmd VimLeave * silent !echo -ne "\033Ptmux;\033\033[0 q\033\\"
+else
+	let &t_SI .= "\<Esc>[6 q"
+	let &t_SR .= "\<Esc>[4 q"
+	let &t_EI .= "\<Esc>[2 q"
+	autocmd VimLeave * silent !echo -ne "\033[0 q"
+endif
+
+" let g:python_host_pro='/usr/bin/python2'
+let g:jedi#force_py_version = 2
+let g:UltisnipsUsePythonVersion = 2

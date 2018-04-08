@@ -1,0 +1,20 @@
+#!/bin/bash
+VIM_PLUG_GIT_URL="https://github.com/junegunn/vim-plug.git"
+
+install_vim_plug () {
+    local plug_dir=$1
+    local config_dir=$2
+
+    mkdir -p "$plug_dir"
+    [[ -d "$plug_dir"/vim-plug ]] || git clone $VIM_PLUG_GIT_URL "$plug_dir"/vim-plug
+    mkdir -p "$config_dir"/autoload
+    ln -sf "$plug_dir"/vim-plug/plug.vim "$config_dir"/autoload/plug.vim
+}
+
+if [[ -d "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim ]]; then
+    install_vim_plug "${XDG_DATA_HOME:-$HOME/.local}"/share/nvim "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
+fi
+
+if [[ -d ~/.vim ]]; then
+    install_vim_plug ~/.vim ~/.vim
+fi

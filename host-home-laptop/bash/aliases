@@ -1,0 +1,40 @@
+#!/bin/bash
+
+alias ls='ls --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
+alias ll='ls -l --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
+alias la='ls -la --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
+alias dir='dir --color=auto'
+alias vdir='vdir --color=auto'
+alias grep='grep --color=auto -d skip'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+alias cp="cp -i"                          # confirm before overwriting something
+alias df='df -h'                          # human-readable sizes
+alias free='free -m'                      # show sizes in MB
+
+alias fuck='eval $(thefuck $(fc -ln -1)); history -r'
+
+alias update='pacaur -Syuu'
+alias inst='pacaur -S'
+alias search='pacaur -Ss'
+alias remove='pacaur -Rsn'
+alias orphans='pacaur -Qdt'
+alias db='sudo pacaur -Syy'
+alias fixit='sudo rm -f /var/lib/pacman/db.lck'
+alias mirrors='sudo pacman-mirrors -g'
+alias pkgbuild='$EDITOR PKGBUILD'
+
+alias con='$EDITOR $HOME/.i3/config'
+alias comp='$EDITOR $HOME/.config/compton.conf'
+
+alias printer='system-config-printer'
+
+alias mount='mount | column -t'
+alias visudo='sudo -E visudo'
+alias reload='source ~/.bashrc'
+# alias vimrc='vim ~/.vimrc'
+alias path='echo $PATH | tr -s ":" "\n"'
+alias clr='printf "\33c\e[3J"'
+
+alias java="java $JAVA_TOOL_OPTIONS"
+unset JAVA_TOOL_OPTIONS
